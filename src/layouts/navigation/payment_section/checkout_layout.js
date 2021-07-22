@@ -14,7 +14,7 @@ import strings from '../../../material/strings'
 import { getTokenData } from '../../../services/account_process'
 import { loadDetailAddress } from '../../../services/address_process'
 import { checkPricingProcess, getCookie, loadDefaultAddress, requestCheckout } from '../../../services/checkout_process'
-import { getAllStockCartItem, getCartDataObject } from '../../../services/database/service_sqlite'
+import { getAllStockCartItem, getCartDataObject, getNoteDataObject } from '../../../services/database/service_sqlite'
 import LoadCartData from '../../../services/load_list/load_cart_data'
 import { CartDataCheckout } from '../../items/cart_data'
 import CheckoutButton from '../../items/floating_checkout_button'
@@ -56,11 +56,12 @@ const CheckoutLayout = (props) =>{
         var requestCookie = await getCookie()
         if(requestCookie.data == 'OK'){
             var dataCart = await getCartDataObject()
+            var noteData = await getNoteDataObject()
             let body = {
                 cartItems : dataCart,
                 usePoint : false,
                 note: '',
-                cartNotes: {},
+                cartNotes: noteData,
                 useCoupon: couponText
             }
             var requestChec = await requestCheckout(body)

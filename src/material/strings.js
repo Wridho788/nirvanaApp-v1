@@ -51,6 +51,7 @@ const strings = {
     canceled_order: 'Canceled\nOrder',
     buy_now: 'Buy Now',
     input_mat_id: `Input Mat ID`,
+    order_note: 'Order Note',
     tap_it: 'Tap it',
     bank_confirmation_message: 'Please Kindly Contact Our Customer Care Via Whatsapp To Confirm Your Order After You Make Your Payment.',
     infoBankTransfer: `Metode pembayaran Bank Transfer dapat dilakukan dengan mentransfer ke rekening BCA kami dengan melampirkan "nomor / kode order" di kolom berita pengiriman. No Rekening tujuan pembayaran akan muncul setelah anda mengklik tombol Yes`,

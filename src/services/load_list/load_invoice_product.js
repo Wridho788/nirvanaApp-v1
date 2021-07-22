@@ -19,6 +19,7 @@ export function loadInvoiceProduct(data){
             productName: dataSet.name,
             productTotalPrice: dataSet.product_price,
             productQty: dataSet.qty,
+            note: dataSet.order_product_note,
             productImage: strings.imageThumbnail+ dataSet.img
         })
     }
@@ -27,6 +28,7 @@ export function loadInvoiceProduct(data){
             productQty={product.productQty} hargaSatuan={product.productTotalPrice / product.productQty}
             stockId={'-'}
             underline={false} 
+            note={(product.note == null || product.note == undefined) ? '-' : product.note}
             productImage={product.productImage}
             productColor={product.color} productSize={product.sizeid}/>  
     ))

@@ -12,7 +12,8 @@ export async function insertProductToDatabase(qty, stockId, productId,  final_pr
                 stokId: stockId,
                 quantity: qty,
                 hargaSatuan: final_price,
-                productId: productId
+                productId: productId,
+                note: ''
             }
             var getAll = await getAllStockCartItem()
             if(!getAll.stockIdData.includes(stockId)){
@@ -45,6 +46,7 @@ export async function getAllStockCartItem() {
     var stockData = []
     var quantityData = []
     var availableStok = []
+    var noteData = []
     var totalHarga = []
     for (let i = 0; i < cartLength; i++) {
         var dataSt = cartFromSqlite[i]
@@ -52,6 +54,7 @@ export async function getAllStockCartItem() {
             availableStok.push(dataSt.stokId)
             quantityData.push(dataSt.quantity)
             stockData.push(dataSt.stokId)
+            noteData.push(dataSt.note)
             totalHarga.push(dataSt.hargaSatuan)
         }
     }
@@ -59,9 +62,9 @@ export async function getAllStockCartItem() {
     let returnData = {
         stockIdData: stockData,
         quantityData: quantityData,
+        noteDataCart: noteData,
         priceTotal: totalHarga
     }
-
     return returnData
 }
 
@@ -95,6 +98,23 @@ export async function updateQtyCart(stockId, newQty) {
         return true
 }
 
+export async function updateNoteCart(stockId, newNote){
+    await AsyncStorage.getItem('cart')
+    .then(data => {
+        var jsonData = JSON.parse(data)
+        for (let i = 0; i < jsonData.length; i++) {
+            var dataJ = jsonData[i]
+            if (dataJ.stokId == stockId) {
+                dataJ.note = newNote
+                AsyncStorage.setItem('cart', JSON.stringify(jsonData))
+            }
+        }
+
+    })
+
+    return true
+}
+
 export async function deleteItemCart(stockId) {
     await AsyncStorage.getItem('cart')
         .then(data => {
@@ -120,4 +140,14 @@ export async function getCartDataObject(){
         dataCart[`${cartItem}`] = stockId.quantityData[i]
     }
     return dataCart
+}
+
+export async function getNoteDataObject(){
+    var stockId = await getAllStockCartItem()
+    var dataNote = {}
+    for( let i = 0; i < stockId.stockIdData.length; i++){
+        var cartItem = stockId.stockIdData[i]
+        dataNote[`${cartItem}`] = stockId.noteDataCart[i]
+    }
+    return dataNote
 }

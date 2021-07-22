@@ -152,7 +152,6 @@ const MatLayout = (props) =>{
 
     useEffect(()=>{
         nfcInit()
-
         if(previewShow){
             if(isLoaded){
                 console.log('Load first')

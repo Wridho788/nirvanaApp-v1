@@ -17,6 +17,7 @@ const LoadCartData = (props) =>{
     var mapCart = []
     const [totalHarga, setTotalHarga] = useState(0)
     const [quantityData, setQuantityData] = useState([]) 
+    const [noteData, setNoteData] = useState([])
     const [isLoaded, setLoaded] = useState(false)
     const [positionDel, setPosition] = useState(-1)
     const [isDelete, setDeleted] = useState(false)
@@ -47,13 +48,14 @@ const LoadCartData = (props) =>{
     const getData = async () =>{
         var stockData = await getAllStockCartItem()
         setQuantityData(stockData.quantityData)
+        setNoteData(stockData.noteDataCart)
         let data = {
             stock: stockData.stockIdData
         }
         props.totalData(stockData.stockIdData.length)
         var dataKeranjang = await loadCartData(data, Constant.urlListCart)
         setLoaded(true)
-        setCartData(dataKeranjang)
+        setCartData(dataKeranjang.reverse())
     }
 
     for(let i = 0; i < cartData.length; i++){
@@ -67,6 +69,7 @@ const LoadCartData = (props) =>{
             productName: indexData.name,
             price: indexData.final_price,
             qty: quantityData[i],
+            note: noteData[i],
             productImage: indexData.img
         })
     }
@@ -82,6 +85,7 @@ const LoadCartData = (props) =>{
                     setDeleted(true)
                     setLoaded(false)
                 }}
+                note={dataCart.note}
                 stockId={dataCart.stockId} onChange={total => {
                     
                     setLoaded(false)
@@ -96,6 +100,7 @@ const LoadCartData = (props) =>{
             <CartDataCheckout productName={dataCart.productName}
                 productQty={dataCart.qty} hargaSatuan={dataCart.price}
                 stockId={dataCart.stockId} 
+                note={(dataCart.note.length > 0) ? dataCart.note : '-'}
                 productImage={strings.imageThumbnail + dataCart.productImage}
                 productColor={dataCart.color} productSize={dataCart.sizeid}/>
         ))

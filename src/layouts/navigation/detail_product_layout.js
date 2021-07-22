@@ -39,7 +39,6 @@ const DeatailProduct = (props) => {
     
     useEffect(() =>{
         (async ()=> {
-            console.log('detail')
             var data = await getAllStockCartItem()
             setDataCart(data.stockIdData.length)
         })()

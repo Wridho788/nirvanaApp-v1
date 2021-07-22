@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import color from '../../material/color'
 import ukuran from '../../material/dimen'
 import TextTitle from './title_text'
@@ -8,10 +8,13 @@ import Counter from 'react-native-counters'
 import { capitalize, convertPrice, spacingUpperCase } from '../../functions/helper'
 import UnderlineLayout from './underline_layout'
 import { useState } from 'react'
-import { deleteItemCart,  updateQtyCart } from '../../services/database/service_sqlite'
+import { deleteItemCart,  updateNoteCart,  updateQtyCart } from '../../services/database/service_sqlite'
+import strings from '../../material/strings'
+import InputText from './text_input'
 
 const CartData = (props) =>{
     const [total, setTotalHarga] = useState(props.productQty * props.hargaSatuan)
+    const [note, setNoteData] = useState(props.note)
     function onChangeNumber(number){
         (async () => { 
             setTotalHarga(number * props.hargaSatuan)
@@ -27,6 +30,11 @@ const CartData = (props) =>{
         if(deleteData){
             props.onDeleted(true)    
         }    
+    }
+
+    const onChangeText = async(text) => {
+        await updateNoteCart(props.stockId, text)
+        setNoteData(text)
     }
 
     return(
@@ -69,7 +77,23 @@ const CartData = (props) =>{
                             </View>
 
                 </View>
-                <UnderlineLayout/>
+
+                <TextInput
+                                style={{ 
+                                    padding: (Platform.OS == 'ios') ? ukuran.dp_8 : ukuran.dp_8,
+                                    marginBottom: ukuran.dp_12,
+                                    borderColor: color.defaultColor, borderWidth: 1, borderRadius: ukuran.dp_10, 
+                                    flex: 1, marginEnd: ukuran.dp_8}}
+                                    placeholder={strings.order_note}
+                                    placeholderTextColor={color.white_100}
+                                    underlineColorAndroid="transparent"
+                                    textContentType="name"
+                                    keyboardType="default"
+                                    onChangeText={onChangeText}
+                                    value={note}
+                                    key={'I'}
+                                autoCapitalize="none" />
+                {/* <UnderlineLayout/> */}
             </View>
         </>
     )
@@ -112,6 +136,8 @@ const CartDataCheckout = (props) => {
                             </View>
 
                 </View>
+
+                <TextTitle fontSize={ukuran.dp_12} align={'left'} text={`${strings.order_note}: ${props.note}`} maxLine={3}/>
             </View>
         </>
     )
