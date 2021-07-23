@@ -26,6 +26,7 @@ import LoadingAnimationLayout from '../items/loading_animation'
 import TopHomeBar from '../items/home_top'
 import { getAllCartItem, getAllStockCartItem } from '../../services/database/service_sqlite'
 import DetailTopBar from '../items/detail_top_bar'
+import FastImage from 'react-native-fast-image'
 
 const DeatailProduct = (props) => {
     //USING array.map untuk identifikasi posisi thumbnail image
@@ -78,7 +79,7 @@ const DeatailProduct = (props) => {
             <DetailTopBar navigasi={props.navigation} cart={dataCart} />
             <ScrollView style={{ backgroundColor: color.white, position: 'relative', alignSelf: 'baseline' }} pointerEvents={onDisableView} showsVerticalScrollIndicator={false}>
                 <View style={styleDetail.parent}>
-                    <Image
+                    <FastImage
                         resizeMode="contain"
                         fadeDuration={0}
                         resizeMethod="resize"

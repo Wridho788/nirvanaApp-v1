@@ -2,6 +2,7 @@
 
 import React, { Component } from "react";
 import { View, StyleSheet, Image, Text, TouchableHighlight} from "react-native";
+import FastImage from "react-native-fast-image";
 import color from "../../material/color";
 import ukuran from "../../material/dimen";
 
@@ -14,7 +15,7 @@ const KategoriHome = ({url, text, id, onpressed}) =>{
         >
         <View
             style={styleKategori.parent}> 
-            <Image style={styleKategori.image} source={{
+            <FastImage style={styleKategori.image} source={{
                 uri: url
             }}/>
             <Text style={styleKategori.text}>{text}</Text>
