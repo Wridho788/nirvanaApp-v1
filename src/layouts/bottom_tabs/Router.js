@@ -36,6 +36,10 @@ import OtpVerifLayout from '../navigation/otp_verification_layout';
 import styleData from '../../values/style';
 import FirstLayout from '../navigation/first_layout';
 import { verticalAnimation } from '../../functions/helper';
+import MatIcon from '../../icons/mymat.svg'
+import NewsIcon from '../../icons/news.svg'
+import MyMatLayout from './MyMatLayout';
+import YogaNewsLayout from './YogaNewsLayout';
 
 const Tab = createBottomTabNavigator()
 
@@ -147,8 +151,7 @@ export default class Router extends Component {
                 initialRouteName="Home"
                 sceneContainerStyle={{backgroundColor: color.white}}
                 tabBarOptions={{
-                    activeTintColor: color.defaultColor,
-                    
+                    activeTintColor: color.defaultColor,        
                     inactiveTintColor: color.defaultColor,
                     tabStyle: {
                         paddingBottom: ukuran.dp_8
@@ -167,6 +170,24 @@ export default class Router extends Component {
                             <IconBottom data={props} image={ShopIcon} />
                         )
                     }} />
+                
+                <Tab.Screen name="My Mat" component={MyMatLayout}    
+                    options={{
+                        
+                        tabBarIcon: (props) => (
+                            <IconBottom data={props} image={MatIcon} />
+                        )
+                        
+                    }} />
+                    
+                <Tab.Screen name="NYS" component={YogaNewsLayout}    
+                    options={{
+                        
+                        tabBarIcon: (props) => (
+                            <IconBottom data={props} image={NewsIcon} />
+                        )
+                        
+                    }} />     
                 <Tab.Screen name="Profile" component={this.AfterLoginData}
 
                     options={{
