@@ -9,6 +9,7 @@ var mainApi2 = mainUrl + "/api/v2"
 var baseMain = mainApi+ "/main"
 var nirvanaUrl = 'https://nirvanastore.id'
 var baseUrl = ''
+var nysBaseUrl = 'https://admin-strapi.nirvanastore.id/bulletins'
 const Constant = {
     
     baseUrl : mainUrl,
@@ -76,7 +77,8 @@ const Constant = {
     getMatData: `${mainApi}/mnm/preview?code=`, // Check mat data (+ kode mat)
     addMatData: `${mainApi}/mnm`, //GET untuk dapatkan data, POST untuk add
 
-
+    //NYS section
+    baseNys: nysBaseUrl,
 
 
     //LINKING URL

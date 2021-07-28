@@ -36,10 +36,12 @@ import OtpVerifLayout from '../navigation/otp_verification_layout';
 import styleData from '../../values/style';
 import FirstLayout from '../navigation/first_layout';
 import { verticalAnimation } from '../../functions/helper';
-import MatIcon from '../../icons/mymat.svg'
-import NewsIcon from '../../icons/news.svg'
+import MatIcon from '../../icons/yogamat.svg'
+import NewsIcon from '../../icons/nys.svg'
 import MyMatLayout from './MyMatLayout';
 import YogaNewsLayout from './YogaNewsLayout';
+import DetailNysLayout from '../navigation/nys_section/detail_nys_layout';
+import TipsTrainingMain from '../navigation/nys_section/tips_training_main_layout';
 
 const Tab = createBottomTabNavigator()
 
@@ -133,6 +135,22 @@ export default class Router extends Component {
         )
     }
 
+    NysData = () => {
+        return(
+            <Stack.Navigator>
+                <Stack.Screen name="NysHome" component={YogaNewsLayout} options={({ navigation }) => ({
+                    header: () => (<TopHomeBar navigasi={navigation} />)
+                })} />
+                <Stack.Screen name="DetailNys" component={DetailNysLayout} options={({ navigation }) => ({
+                    header: () => (<BackTopHeader navigasi={navigation} />)
+                })} />
+                <Stack.Screen name="TipsTrainingMain" component={TipsTrainingMain} options={({ navigation }) => ({
+                    header: () => (<BackTopHeader navigasi={navigation} />)
+                })} />
+            </Stack.Navigator>
+        )
+    }
+
     ShopData = () => {
         return (
             <Stack.Navigator>
@@ -180,7 +198,7 @@ export default class Router extends Component {
                         
                     }} />
                     
-                <Tab.Screen name="NYS" component={YogaNewsLayout}    
+                <Tab.Screen name="NYS" component={this.NysData}    
                     options={{
                         
                         tabBarIcon: (props) => (

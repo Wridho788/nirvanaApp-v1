@@ -31,7 +31,7 @@ const CategoryYogaNews = (props) => {
             <TouchableOpacity activeOpacity={0.8}
                 underlayColor={color.white}
                 style={styleKategori.parent}
-                onPress={props.onpressed}>
+                onPress={props.onPressed}>
                     <ImageBackground source={{uri: 'https://nirvana-store-assets.s3.ap-southeast-1.amazonaws.com/thumbnail_tangerines_3192863_1280_c3e8f05379_f6502e2acb.jpg'}}
                          style={styleKategori.img} imageStyle={{borderRadius: ukuran.dp_8, opacity: 0.5}}>               
                         <TextTitle text={props.categoryName}
