@@ -10,9 +10,10 @@ const CategoryYogaNews = (props) => {
 
     const styleKategori = StyleSheet.create({
         parent: {
-            width: Platform.OS == 'ios' ? 70 : 80,
-            marginEnd: props.isLast ? 0 : Platform.OS == 'ios' ? ukuran.dp_18 : ukuran.dp_14,
-            height: Platform.OS == 'ios' ? 70 : 80
+            width: ukuran.wpMatchParent  /4- 20,
+            marginEnd: Platform.OS == 'ios' ? 8 : 8,
+            marginStart: Platform.OS == 'ios' ? 8 : 8,
+            height: ukuran.wpMatchParent /4 - 20,
         },
         img: {
             flex: 1,

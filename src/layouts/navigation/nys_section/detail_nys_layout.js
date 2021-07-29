@@ -11,6 +11,7 @@ import { useState } from 'react/cjs/react.development'
 import LoadingAnimationLayout from '../../items/loading_animation'
 import { loadDetailNys, loadListNysData, loadVideoDataNys } from '../../../services/load_list/load_nys_data'
 import TipsCategoryData from '../../items/yoga_news_section/tips_training_nys'
+import WebView from 'react-native-webview'
 
 
 const DetailNysLayout = (props) => {
@@ -31,7 +32,7 @@ const DetailNysLayout = (props) => {
                     videoLink: detailData.video_link
                 })
                 if(detailData.isVideo){
-                    var list = await loadVideoDataNys(0,1,props.navigation, true)
+                    var list = await loadVideoDataNys(8,1,props.navigation, true)
                     setMoreData(list)
                 }else{
                     var list = await loadListNysData(0,1,props.navigation, true)
@@ -47,15 +48,13 @@ const DetailNysLayout = (props) => {
 
     return(
         <>
+        <View style={{backgroundColor: color.white, flex: 1}}>
             <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
                 <View style={styleDetail.parent}> 
                     <TextTitle align={'center'} maxLine={99} text={dataDetail.title} tipe={'bold'} top={ukuran.dp_30} fontSize={ukuran.dp_20} start={ukuran.dp_10} end={ukuran.dp_10} />
                     <TextTitle align={'center'} maxLine={99} warna={color.white_100} text={dataDetail.shortDesc} top={ukuran.dp_16} fontSize={ukuran.dp_12} start={ukuran.dp_10} end={ukuran.dp_10} />
                     {(dataDetail.isVideo != null) ? 
-                        <FastImage
-                        style={styleDetail.image}
-                        resizeMode="cover"
-                        source={{uri: dataDetail.thumbnail}}/>
+                        <WebView source={{uri: dataDetail.videoLink}} style={{height: 240}} javaScriptEnabled={true} domStorageEnabled={true}/>
                         :
                         <FastImage
                             style={styleDetail.image}
@@ -83,6 +82,7 @@ const DetailNysLayout = (props) => {
                     </ScrollView>
                 </View>
             </ScrollView>
+            </View>
         </>
     )
 }

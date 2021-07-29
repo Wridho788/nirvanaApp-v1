@@ -58,15 +58,13 @@ const YogaNewsLayout = (props) => {
                         <TextTitle text={'YOGA SHALA'} fontSize={ukuran.dp_20} />
                     </Text>
                     <UnderLineCustom height={1} color={color.defaultColor} />
-                    <View style={{ alignSelf: 'center', width: Platform.OS == 'ios' ? ukuran.wpPercent90 : null }}>
                         <View
-                            style={{ flexWrap: 'wrap', flexDirection: 'row', marginTop: ukuran.dp_20, marginBottom: ukuran.dp_24 }}>
+                            style={{ flexWrap: 'wrap', justifyContent: 'center', flexDirection: 'row', marginTop: ukuran.dp_20, marginBottom: ukuran.dp_24 }}>
                             <CategoryYogaNews categoryName={strings.yogahealth} onPressed={e => props.navigation.navigate('TipsTrainingMain', {isNews: true, title: strings.yogahealth, id: 2})}/>
                             <CategoryYogaNews categoryName={strings.figur} onPressed={e => props.navigation.navigate('TipsTrainingMain', {isNews: true, title: strings.figur, id: 3})}/>
                             <CategoryYogaNews categoryName={strings.komunitas} onPressed={e => props.navigation.navigate('TipsTrainingMain', {isNews: true, title: strings.komunitas, id: 5})}/>
                             <CategoryYogaNews categoryName={strings.videoYoga} isLast={true} onPressed={e => props.navigation.navigate('TipsTrainingMain', {isNews: false, title: strings.videoYoga, id: 8})}/>
                         </View>
-                    </View>
                     <View
                         style={{ width: ukuran.wpPercent90, alignSelf: 'center', flexWrap: 'wrap', alignItems : 'center', flexDirection: 'row', marginBottom: ukuran.dp_24 }}>
                         <Text style={{ textAlign: 'center', marginEnd: ukuran.dp_10}}>

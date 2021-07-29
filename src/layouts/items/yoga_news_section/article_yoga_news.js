@@ -1,5 +1,6 @@
 import React from 'react'
 import { Dimensions, ImageBackground, Platform, StyleSheet, TouchableOpacity } from 'react-native'
+import { dateFormat } from '../../../functions/helper'
 import color from '../../../material/color'
 import ukuran from '../../../material/dimen'
 import TextTitle from '../title_text'
@@ -35,7 +36,7 @@ const NewsYoga = (props) => {
                              warna={color.white} tipe={'bold'} fontSize={ukuran.dp_14}/>
                         <TextTitle text={props.shortDesc} start={ukuran.dp_20} end={ukuran.dp_20} top={ukuran.dp_14}
                              warna={color.white}fontSize={ukuran.dp_14} maxLine={3}/>     
-                        <TextTitle text={props.date} start={ukuran.dp_20} end={ukuran.dp_20} top={ukuran.dp_14} bottom={ukuran.dp_14}
+                        <TextTitle text={dateFormat(props.date, 'DD MMMM YYYY')} start={ukuran.dp_20} end={ukuran.dp_20} top={ukuran.dp_14} bottom={ukuran.dp_14}
                              warna={color.white}fontSize={ukuran.dp_14}/>      
                     </ImageBackground>
             </TouchableOpacity>
