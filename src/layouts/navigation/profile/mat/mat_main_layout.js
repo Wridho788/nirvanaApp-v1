@@ -53,7 +53,7 @@ const MatLayout = (props) =>{
             loadMatData()
             previewRef.current.snapTo(1)
         }
-    }} onBackPressed={()=>previewRef.current.snapTo(1)} matData={matDataInput}/>)}
+    }} onBackPressed={()=>previewRef.current.snapTo(1)} matData={matDataInput} onStartPress={e => props.navigation.navigate('StartYogaMatMain', {matData: matDataInput})}/>)}
 
     let fall = new Animated.Value(1);
     const animatedShadowOpacity = Animated.interpolateNode(fall, {
@@ -220,8 +220,9 @@ const MatLayout = (props) =>{
                 renderContent={nfcShow}/>    
             <BottomSheet
                 ref={previewRef}
-                snapPoints={[515, 0, 0]}
-                enabledInnerScrolling={false}
+                snapPoints={['78%', 0, 0]}
+                enabledInnerScrolling={true} 
+                borderRadius={30}
                 onCloseEnd={() => setDisableView('')}
                 enabledContentGestureInteraction={true}
                 callbackNode={fall}

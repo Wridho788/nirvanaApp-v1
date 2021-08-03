@@ -50,6 +50,7 @@ const strings = {
     checkout: 'Checkout',
     canceled_order: 'Canceled\nOrder',
     buy_now: 'Buy Now',
+    mynirvanamat: `My Nirvana Mat`,
     input_mat_id: `Input Mat ID`,
     order_note: 'Order Note',
     tap_it: 'Tap it',

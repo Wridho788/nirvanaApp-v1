@@ -42,6 +42,9 @@ import MyMatLayout from './MyMatLayout';
 import YogaNewsLayout from './YogaNewsLayout';
 import DetailNysLayout from '../navigation/nys_section/detail_nys_layout';
 import TipsTrainingMain from '../navigation/nys_section/tips_training_main_layout';
+import MatYogaStart from '../navigation/profile/mat/start_yoga_mat/start_yoga_main_layout';
+import PageTraining from '../navigation/profile/mat/start_yoga_mat/page_training_layout';
+import BlankHeader from '../items/blank_header';
 
 const Tab = createBottomTabNavigator()
 
@@ -162,6 +165,23 @@ export default class Router extends Component {
         )
     }
 
+    MatData = () => {
+        return (
+            <Stack.Navigator>
+                <Stack.Screen name="MyMatList" component={MatLayout} options={({ navigation }) => ({
+                    header: () => (<TopHomeBar navigasi={navigation} />)
+                })} />
+                <Stack.Screen name="StartYogaMatMain" component={MatYogaStart} options={({ navigation }) => ({
+                    header: () => (<BackTopHeader navigasi={navigation} />)
+                })} />
+
+                <Stack.Screen name="PageTraining" component={PageTraining} options={({ navigation }) => ({
+                    header: () => (<BlankHeader navigasi={navigation} />)
+                })} />
+            </Stack.Navigator>
+        )
+    }
+
     HomeWithBottomTab = () => {
         return (
              
@@ -189,9 +209,9 @@ export default class Router extends Component {
                         )
                     }} />
                 
-                <Tab.Screen name="My Mat" component={MyMatLayout}    
+                <Tab.Screen name="My Mat" component={this.MatData}    
                     options={{
-                        
+                        unmountOnBlur: true,
                         tabBarIcon: (props) => (
                             <IconBottom data={props} image={MatIcon} />
                         )

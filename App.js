@@ -29,8 +29,8 @@ export default class App extends Component{
   //   }
 
   render(){
-    //LogBox.ignoreLogs(['Warning:'])
-    LogBox.ignoreAllLogs()
+   LogBox.ignoreLogs(['Warning:'])
+    //LogBox.ignoreAllLogs()
     return (
       <>
           {/* <View style={styleData.darkStatusBar}>

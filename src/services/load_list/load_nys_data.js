@@ -10,9 +10,9 @@ export async function loadListNysData(categoryId, page, nav, isSlider){
     var response = []
     var url = ''
     if(categoryId == 0){
-        url = `${Constant.baseNys}?_page=${page}`
+        url = `${Constant.baseNys}?_page=${page}&_sort=published_at:desc`
     }else{
-        url = `${Constant.baseNys}?_page=${page}&news_categories.id=${categoryId}`
+        url = `${Constant.baseNys}?_page=${page}&news_categories.id=${categoryId}&_sort=published_at:desc`
     }
     await axios.get(url, {
         headers: {
@@ -52,9 +52,9 @@ export async function loadVideoDataNys(categoryId, page, nav, isSlider){
     var response = []
     var url = ''
     if(categoryId == 0){
-        url = `${Constant.baseNys}?_page=${page}`
+        url = `${Constant.baseNys}?_page=${page}&_sort=published_at:desc`
     }else{
-        url = `${Constant.baseNys}?_page=${page}&news_categories.id=${categoryId}`
+        url = `${Constant.baseNys}?_page=${page}&news_categories.id=${categoryId}&_sort=published_at:desc`
     }
     await axios.get(url, {
         headers: {

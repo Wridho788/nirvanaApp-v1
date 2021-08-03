@@ -21,19 +21,19 @@ const PreviewMat = (props) => {
     const [matColor, setMatColor] = useState('')
     const [gifUrl, setMatGifUrl] = useState('')
     const [isUsed, setUsed] = useState(false)
-    useEffect(()=>{
-            fetchData(props.matData)
+    useEffect(() => {
+        fetchData(props.matData)
     }, [props.matData])
 
-    function fetchData(matData){
-        if(matData.full_name != null){
+    function fetchData(matData) {
+        if (matData.full_name != null) {
             setUsed(true)
             setMatId(matData.code)
             setMatName(matData.name)
             setMatColor(matData.color)
             setMatOwner(matData.full_name)
             setMatGifUrl(matData.mnm_animation_url)
-        }else{
+        } else {
             setUsed(false)
             setMatId(matData.code)
             setMatName(matData.name)
@@ -44,17 +44,17 @@ const PreviewMat = (props) => {
         console.log(matOwner)
     }
 
-    const addMatProcess = async() =>{
-        if(matOwner.length > 0){
+    const addMatProcess = async () => {
+        if (matOwner.length > 0) {
             console.log('Ada' + matOwner)
             showSnackBar(strings.something_wrong)
-        }else{
+        } else {
             setProgress(true)
             var reqeuestAddMat = await requestAddMatData(matId)
             var matResponse = getResponseMat(reqeuestAddMat)
-            if(matResponse == strings.sucess){
+            if (matResponse == strings.sucess) {
                 showSnackBar(strings.matAdded)
-            }else{
+            } else {
                 showSnackBar(matResponse)
             }
             props.isAdded(true)
@@ -62,60 +62,74 @@ const PreviewMat = (props) => {
         }
     }
 
-    return(
+    return (
         <>
-           <View style={styleMat.parent}>
+            <View style={styleMat.parent}>
                 {!isProgress &&
-                <View style={{margin: ukuran.dp_14}}>
-                    <TextTitle fontSize={ukuran.dp_16} align={'center'} tipe={'bold'} text={'MY NIRVANA MAT'}
-                        maxLine={1} warna={color.defaultColor} bottom={ukuran.dp_14} top={ukuran.dp_14} />
-                    <View style={{height: ukuran.matPreviewHeight, alignItems: 'center'}}>
-                        <FastImage style={styleMat.image} source={gifUrl ? { uri: gifUrl } : null} />
+                    <View style={{ margin: ukuran.dp_14 }}>
+                        <TextTitle fontSize={ukuran.dp_16} align={'center'} tipe={'bold'} text={matOwner}
+                            maxLine={1} warna={color.defaultColor} bottom={ukuran.dp_14} top={ukuran.dp_14} />
+                        <View style={{ height: 230, alignItems: 'center' }}>
+                            <FastImage style={styleMat.image} source={gifUrl ? { uri: gifUrl } : null} />
+                        </View>
+                        <TextTitle fontSize={ukuran.dp_16} align={'center'} tipe={'bold'} text={`${matName} - ${spacingUpperCase(capitalize(matColor))}`}
+                            maxLine={1} warna={color.defaultColor} bottom={ukuran.dp_14} top={ukuran.dp_16} />
+                        {isUsed && <TextTitle fontSize={ukuran.dp_14} align={'center'} text={'Ini status'}
+                            maxLine={1} warna={color.defaultColor} bottom={ukuran.dp_20}/>}
+                        {!isUsed ?
+                            <View>
+                                <TextTitle fontSize={ukuran.dp_14} align={'center'} tipe={'normal'} text={matId}
+                                    maxLine={1} warna={color.white_100} bottom={ukuran.dp_14} />
+                                <CustomButton
+                                    width={'match'}
+                                    onpressed={e => addMatProcess()}
+                                    backgroundColor={color.defaultColor}
+                                    text={strings.add} />
+                            </View>
+                            :
+                            <View>
+                                <CustomButton
+                                    width={'match'}
+                                    onpressed={props.onStartPress}
+                                    backgroundColor={color.defaultColor}
+                                    text={!props.onStartText ?`Start Yoga` : props.onStartText} />
+                                    
+                                <CustomButton
+                                    width={'match'}
+                                    onpressed={props.onProgressPress}
+                                    backgroundColor={color.white}
+                                    text={!props.onProgressText ?`Progress` : props.onProgressText} />
+                            </View>
+                                
+                        }
+                        <CustomButton
+                            width={'match'}
+                            onpressed={props.onBackPressed}
+                            backgroundColor={color.white}
+                            text={strings.back} />
                     </View>
-                    <TextTitle fontSize={ukuran.dp_16} align={'center'} tipe={'bold'} text={`${matName} - ${spacingUpperCase(capitalize(matColor))}`}
-                        maxLine={1} warna={color.defaultColor} bottom={ukuran.dp_14} top={ukuran.dp_16}/>
-                    {isUsed && <TextTitle fontSize={ukuran.dp_16} align={'center'} tipe={'bold'} text={matOwner}
-                        maxLine={1} warna={color.defaultColor} bottom={ukuran.dp_30} top={ukuran.dp_10}/>}
-                    {!isUsed && 
-                        <View>
-                            <TextTitle fontSize={ukuran.dp_14} align={'center'} tipe={'normal'} text={matId}
-                                maxLine={1} warna={color.white_100} bottom={ukuran.dp_14} />
-                            <CustomButton
-                                width={'match'}
-                                onpressed={e => addMatProcess()}
-                                backgroundColor={color.defaultColor}
-                                text={strings.add} /> 
-                        </View>}
-                    <CustomButton
-                        width={'match'}
-                        onpressed={props.onBackPressed}
-                        backgroundColor={color.white}
-                        text={strings.back} />    
-                </View>
                 }
-                {isProgress && 
-                <View style={styleMat.progress}>
-                    <CircleProgressBar/>
-                </View>}
-            </View>  
+                {isProgress &&
+                    <View style={styleMat.progress}>
+                        <CircleProgressBar />
+                    </View>}
+            </View>
         </>
     )
 }
 
 const styleMat = StyleSheet.create({
     parent: {
-        height: ukuran._matchparent,
-        borderRadius: ukuran.dp_30,
-        backgroundColor: color.white
+        backgroundColor: color.white,
     },
 
-    progress:{
+    progress: {
         alignSelf: 'center',
         position: 'absolute',
         top: '30%',
     },
 
-    image:{
+    image: {
         height: undefined,
         width: '100%',
         flex: 1,
