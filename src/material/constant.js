@@ -76,6 +76,7 @@ const Constant = {
     //Mat
     getMatData: `${mainApi}/mnm/preview?code=`, // Check mat data (+ kode mat)
     addMatData: `${mainApi}/mnm`, //GET untuk dapatkan data, POST untuk add
+    inputTraining: `${mainApi}/mnm/training`, //POST for input
 
     //NYS section
     baseNys: nysBaseUrl,

@@ -26,9 +26,12 @@ const CustomProgressBar = ({isVisible}) =>{
     )
 }
 
-const ViewCustomDialog = ({isVisible, view, onDismiss}) => {
+const ViewCustomDialog = ({isVisible, view, onDismiss, onConfirm}) => {
     return(
         <AwesomeAlert
+            showCancelButton={onConfirm}
+            showConfirmButton={onConfirm}
+            confirmButtonColor={color.defaultColor}
             show={isVisible}
             onCancelPressed={onDismiss}
             onDismiss={onDismiss}

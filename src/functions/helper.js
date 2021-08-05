@@ -15,6 +15,14 @@ export function dateFormat(date, format){
     return moment(date).utc().format(format)
 }
 
+export function convertSeconds(seconds){
+  var minute = seconds % 3600 / 60
+  var hour = seconds / 3600
+  return `${String(hour).split('.')[0]}h ${String(minute).split('.')[0]}m`
+  //input = 7260
+  //output = 2h 1m
+}
+
 export function showSnackBar(message){
     
     if(Platform.OS == 'ios'){

@@ -10,7 +10,7 @@ const MatYogaStart = (props) => {
 
 
     var matData = props.route.params.matData
-
+    
 
     return (
         <>
@@ -23,7 +23,7 @@ const MatYogaStart = (props) => {
                             onProgressPress={e => console.log('with instruc')}
                             onStartPress={e=> {
                                 
-                                props.navigation.navigate('PageTraining')
+                                props.navigation.navigate('PageTraining', {codeMat: matData.code})
                             }}
                             onProgressText={'With our Instructor'} onStartText={'Start on Your Own'} nav={props.navigation} />
                     </View>

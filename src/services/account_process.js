@@ -2,7 +2,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import axios from "axios"
 import Constant from "../material/constant"
 
-//only support register or login
 export async function authAccountProccess(data, url){
     var datas = ""
     await axios.post(url, data, {

@@ -21,6 +21,9 @@ const PreviewMat = (props) => {
     const [matColor, setMatColor] = useState('')
     const [gifUrl, setMatGifUrl] = useState('')
     const [isUsed, setUsed] = useState(false)
+
+    var componentHide = false
+
     useEffect(() => {
         fetchData(props.matData)
     }, [props.matData])
@@ -74,7 +77,7 @@ const PreviewMat = (props) => {
                         </View>
                         <TextTitle fontSize={ukuran.dp_16} align={'center'} tipe={'bold'} text={`${matName} - ${spacingUpperCase(capitalize(matColor))}`}
                             maxLine={1} warna={color.defaultColor} bottom={ukuran.dp_14} top={ukuran.dp_16} />
-                        {isUsed && <TextTitle fontSize={ukuran.dp_14} align={'center'} text={'Ini status'}
+                        {isUsed && <TextTitle fontSize={ukuran.dp_14} align={'center'} text={''}
                             maxLine={1} warna={color.defaultColor} bottom={ukuran.dp_20}/>}
                         {!isUsed ?
                             <View>
@@ -94,11 +97,11 @@ const PreviewMat = (props) => {
                                     backgroundColor={color.defaultColor}
                                     text={!props.onStartText ?`Start Yoga` : props.onStartText} />
                                     
-                                <CustomButton
+                                {/* <CustomButton
                                     width={'match'}
                                     onpressed={props.onProgressPress}
                                     backgroundColor={color.white}
-                                    text={!props.onProgressText ?`Progress` : props.onProgressText} />
+                                    text={!props.onProgressText ?`Progress` : props.onProgressText} /> */}
                             </View>
                                 
                         }
@@ -121,6 +124,7 @@ const PreviewMat = (props) => {
 const styleMat = StyleSheet.create({
     parent: {
         backgroundColor: color.white,
+        height: ukuran._matchparent
     },
 
     progress: {

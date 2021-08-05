@@ -220,7 +220,7 @@ const MatLayout = (props) =>{
                 renderContent={nfcShow}/>    
             <BottomSheet
                 ref={previewRef}
-                snapPoints={['78%', 0, 0]}
+                snapPoints={[535, 0, 0]}
                 enabledInnerScrolling={true} 
                 borderRadius={30}
                 onCloseEnd={() => setDisableView('')}
