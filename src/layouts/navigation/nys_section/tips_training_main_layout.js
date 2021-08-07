@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
+import { useCallback } from 'react'
 import { useState } from 'react'
-import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Platform, RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import color from '../../../material/color'
 import ukuran from '../../../material/dimen'
 import strings from '../../../material/strings'
@@ -21,11 +22,19 @@ const TipsTrainingMain = (props) => {
     const [page, setPage] = useState(1)
     const [dataList, setData] = useState([])
     const [totalData, setTotal] = useState(0)
+    const [refreshing, setRefresing] = useState(false)
     var dataArr = []
 
     const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) =>{
         return layoutMeasurement.height + contentOffset.y >= contentSize.height - 20;
      }
+
+     const onRefresh = useCallback(() => {
+        setRefresing(true)
+        setData([])
+        setPage(1)
+        setLoaded(false)
+    })
 
     useEffect(() => {
         if(!isLoaded){
@@ -44,13 +53,18 @@ const TipsTrainingMain = (props) => {
                 setData(dataArr)
                 setLoaded(true)
                 setProgress(false)
+                setRefresing(false)
             })()
         }
     }, [isLoaded])
     return (
         <>
         <View style={{backgroundColor: color.white, flex: 1}}>
-            <ScrollView showsVerticalScrollIndicator={false} bounces={false}  onScroll={({nativeEvent}) => {
+            <ScrollView refreshControl={
+                <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={onRefresh}/>
+                    } showsVerticalScrollIndicator={false} bounces={true}  onScroll={({nativeEvent}) => {
                         
                         if (isCloseToBottom(nativeEvent)) {
                             if(totalData > 0){

@@ -16,6 +16,7 @@ const ProgressInputTraining  = (props) => {
                 borderWidth: 1,
                 marginTop: ukuran.dp_20,
                 marginStart: ukuran.dp_20,
+                marginBottom: ukuran.dp_20,
                 marginEnd: ukuran.dp_20,
                 borderColor: color.defaultColor}}>
             {!props.isHistories && <TextTitle fontSize={ukuran.dp_12} align={'center'} top={ukuran.dp_14} tipe={'bold'} text={'Save Activity'.toUpperCase()}
@@ -58,6 +59,7 @@ const ProgressInputTraining  = (props) => {
 
 const styleProgress = StyleSheet.create({
     parent: {
+        marginBottom: ukuran.dp_20,
         flexDirection: 'row',
             
     },

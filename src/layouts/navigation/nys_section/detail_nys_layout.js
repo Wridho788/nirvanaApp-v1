@@ -11,6 +11,8 @@ import LoadingAnimationLayout from '../../items/loading_animation'
 import { loadDetailNys, loadListNysData, loadVideoDataNys } from '../../../services/load_list/load_nys_data'
 import TipsCategoryData from '../../items/yoga_news_section/tips_training_nys'
 import WebView from 'react-native-webview'
+import styleData from '../../../values/style'
+import Video from 'react-native-video'
 
 
 const DetailNysLayout = (props) => {
@@ -28,8 +30,11 @@ const DetailNysLayout = (props) => {
                     thumbnail: detailData.cover.url,
                     content: detailData.content,
                     isVideo: detailData.isVideo,
+                    is_training_video: detailData.is_training_video,
+                    training_video: detailData.training_video,
                     videoLink: detailData.video_link
                 })
+                console.log(detailData.training_video)
                 if(detailData.isVideo){
                     var list = await loadVideoDataNys(8,1,props.navigation, true)
                     setMoreData(list)
@@ -55,10 +60,13 @@ const DetailNysLayout = (props) => {
                     {(dataDetail.isVideo != null) ? 
                         <WebView source={{uri: dataDetail.videoLink}} style={{height: 240, marginTop: ukuran.dp_16}} javaScriptEnabled={true} domStorageEnabled={true}/>
                         :
-                        <FastImage
+                        !dataDetail.is_training_video ? <FastImage
                             style={styleDetail.image}
                             resizeMode="cover"
                             source={{uri: dataDetail.thumbnail}}/>
+                        :
+                        <Video paused={false} controls={true} source={{uri: dataDetail.training_video}}
+                            style={styleDetail.videoBackground} repeat={true} resizeMode="cover"/>
                     }
                     <MarkDown style={markdownStyle}>
                         {
@@ -113,6 +121,13 @@ const markdownStyle = StyleSheet.create({
 const styleDetail = StyleSheet.create({
     parent: {
         backgroundColor: color.white
+    },
+
+
+    videoBackground: {
+        height: 240,
+        marginTop: 20,
+        marginBottom: ukuran.dp_24
     },
 
     image: {

@@ -124,7 +124,7 @@ const PreviewMat = (props) => {
 const styleMat = StyleSheet.create({
     parent: {
         backgroundColor: color.white,
-        height: ukuran._matchparent
+        height: ukuran._matchparent,
     },
 
     progress: {

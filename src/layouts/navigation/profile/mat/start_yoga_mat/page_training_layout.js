@@ -2,6 +2,7 @@ import moment from 'moment'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { BackHandler, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import FastImage from 'react-native-fast-image'
 import Video from 'react-native-video'
 import { convertSeconds, showSnackBar } from '../../../../../functions/helper'
 import StopWatchReact from '../../../../../functions/stopwatch'
@@ -72,7 +73,7 @@ const PageTraining = (props) => {
             BackHandler.addEventListener('hardwareBackPress', () => true)
             var videoUrl = await loadVideoUrl()
             setUrlVideo(videoUrl)
-            setCurrentTime(moment().format('HH:mm'))        
+            setCurrentTime(moment().format('HH:mm'))  
         })()
     }, [])
 
@@ -86,13 +87,19 @@ const PageTraining = (props) => {
                 }}/>}/>)}
            <View style={{backgroundColor: color.white, flex: 1, flexDirection: 'row', alignSelf: 'center'}}>
                <View style={stylePage.parent}>
+                    <TextTitle fontSize={ukuran.dp_40} align={'center'} tipe={'bold'} text={`Nirvana`.toUpperCase()}
+                        maxLine={1} warna={color.defaultColor} bottom={14}/>
                     {areaTraining && withOur ? <Video paused={isPaused} controls={true} source={{uri: urlVideo}}
-                        style={stylePage.videoBackground} repeat={true} resizeMode="cover"/> : null}
+                        style={stylePage.videoBackground} repeat={true} resizeMode="cover"/> : 
+                        <View style={{alignSelf: 'center'}}>
+                            <FastImage style={{width: 200, height: 200}} source={require('../../../../../../assets/gif/lotus.png')}/>
+                        </View>
+                        }
                         {areaTraining && <View>
                             <TextTitle fontSize={ukuran.dp_18} align={'center'} text={`Clock`.toUpperCase()}
                                 maxLine={1} warna={color.defaultColor}/>
                             <TextTitle fontSize={60} align={'center'} tipe={'bold'} text={currentTime}
-                                maxLine={1} warna={color.defaultColor} top={ukuran.dp_10}/>
+                                maxLine={1} warna={color.defaultColor} top={ukuran.dp_10} bottom={ukuran.dp_10}/>
                              <UnderlineLayoutGrey/>
                         </View>    }
                         {saveInputData && <ProgressInputTraining 
@@ -184,8 +191,7 @@ const stylePage = StyleSheet.create({
     areaButton: {
         flexDirection: 'row',
         alignSelf: 'center',
-        marginTop: ukuran.dp_24,
-        marginBottom: ukuran.dp_30
+        marginBottom: ukuran.dp_20
     },
 
     button: {

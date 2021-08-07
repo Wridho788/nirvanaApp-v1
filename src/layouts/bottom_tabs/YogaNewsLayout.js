@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { useCallback } from 'react'
+import { Platform, RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import color from '../../material/color'
 import ukuran from '../../material/dimen'
 import strings from '../../material/strings'
@@ -17,12 +18,21 @@ const YogaNewsLayout = (props) => {
     const [isLoaded, setLoaded] = useState(false)
     const [page, setPage] = useState(1)
     const [dataList, setData] = useState([])
+    const [refreshing, setRefresing] = useState(false)
     const [totalData, setTotal] = useState(0)
     var dataArr = []
 
     const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) =>{
         return layoutMeasurement.height + contentOffset.y >= contentSize.height - 20;
      }
+
+     const onRefresh = useCallback(() => {
+         setRefresing(true)
+         console.log('ss')
+         setData([])
+         setPage(1)
+         setLoaded(false)
+     })
 
     useEffect(() => {
         if(!isLoaded){
@@ -36,13 +46,18 @@ const YogaNewsLayout = (props) => {
                 setData(dataArr)
                 setLoaded(true)
                 setProgress(false)
+                setRefresing(false)
             })()
         }
     }, [isLoaded])
 
     return (
         <>
-            <ScrollView style={{backgroundColor:color.white}} showsVerticalScrollIndicator={false} bounces={false}  onScroll={({nativeEvent}) => {
+            <ScrollView refreshControl={
+                <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={onRefresh}/>
+            }  style={{backgroundColor:color.white}} showsVerticalScrollIndicator={false} bounces={true}  onScroll={({nativeEvent}) => {
                         if (isCloseToBottom(nativeEvent)) {
                             if(totalData > 0){
                                 setLoadMore(false)

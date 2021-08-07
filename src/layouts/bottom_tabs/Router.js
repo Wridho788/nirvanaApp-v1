@@ -47,6 +47,7 @@ import PageTraining from '../navigation/profile/mat/start_yoga_mat/page_training
 import BlankHeader from '../items/blank_header';
 import ProgressInputTraining from '../items/training_mat_section/progress_input_data';
 import ProgressTrainingLayout from '../navigation/profile/mat/progress_training_layout';
+import NirvanaHeader from '../items/nirvana_header';
 
 const Tab = createBottomTabNavigator()
 
@@ -260,12 +261,12 @@ export default class Router extends Component {
         return (
             <>
                 <Stack.Navigator initialRouteName="First"  screenOptions={{ headerShown: false }}>
-                    <Stack.Screen name="First" component={FirstLayout} />
+                    <Stack.Screen name="First" component={FirstLayout}  options={() => ({gestureEnabled: true})} />
                     <Stack.Screen name="Splash" component={SplashLayout} options={verticalAnimation}/>
-                    <Stack.Screen name="Order" component={this.OrderData} />
-                    <Stack.Screen name="Main" component={this.HomeWithBottomTab} />
+                    <Stack.Screen name="Order" component={this.OrderData}  options={() => ({gestureEnabled: true})}/>
+                    <Stack.Screen name="Main" component={this.HomeWithBottomTab} options={() => ({gestureEnabled: true})}/>
                     <Stack.Screen name="PageTraining" component={PageTraining}  options={({ navigation }) => ({
-                        header: () => (<BlankHeader navigasi={navigation} />),
+                        header: () => (<NirvanaHeader navigasi={navigation} />),
                         gestureEnabled: false,
                     })} />
                 </Stack.Navigator>

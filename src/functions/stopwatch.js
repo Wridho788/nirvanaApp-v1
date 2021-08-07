@@ -35,7 +35,7 @@ const StopWatchReact = (props) =>{
     return(
         <>
             <TextTitle fontSize={40} align={'center'} tipe={'bold'} text={`${jam < 10 ?'0':''}${jam} : ${menit < 10 ?'0':''}${menit} : ${detik < 10 ?'0':''}${detik}`}
-                maxLine={1} warna={color.defaultColor} top={ukuran.dp_10} bottom={ukuran.dp_40}/> 
+                maxLine={1} warna={color.defaultColor} top={ukuran.dp_10} bottom={ukuran.dp_20}/> 
         </>
     )
 }

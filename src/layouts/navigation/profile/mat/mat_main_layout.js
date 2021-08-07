@@ -21,6 +21,7 @@ import EmptyBoxLayout from '../../../items/empty_box'
 import NfcManager, { NfcTech } from 'react-native-nfc-manager';
 import { showSnackBar } from '../../../../functions/helper'
 import NfcPopup from './nfc_popup'
+import CustomButton from '../../../button/default_button'
 
 const MatLayout = (props) => {
     const [isAddDialog, setAddDialog] = useState(false)
@@ -33,7 +34,7 @@ const MatLayout = (props) => {
     const [log, setLog] = useState('')
     const [isProgress, setProgress] = useState(false)
     const [isNfcSupport, setNfcSupport] = useState(false)
-
+    const[tapitBtn, showTapIt] = useState(true)
     const addRef = useRef(null)
     const previewRef = useRef(null)
     const nfcRefDialog = useRef(null)
@@ -164,6 +165,7 @@ const MatLayout = (props) => {
                 loadMatData()
             } else {
                 console.log('show')
+                showTapIt(false)
                 previewRef.current.snapTo(0)
             }
             setShowPreview(false)
@@ -189,6 +191,7 @@ const MatLayout = (props) => {
 
                             if (isNfcSupport) {
                                 if (Platform.OS == 'android') {
+                                    showTapIt(false)
                                     nfcRefDialog.current.snapTo(0)
                                     setDisableView('none')
                                 }
@@ -198,6 +201,8 @@ const MatLayout = (props) => {
                             }
                             setAddDialog(false)
                         }} onInputIDClick={() => {
+
+                        showTapIt(false)
                             addRef.current.snapTo(0)
                             setDisableView('none')
                             setAddDialog(false)
@@ -214,12 +219,35 @@ const MatLayout = (props) => {
                         <LoadListMatData data={matDataLayout} onClick={id => requestPreviewMat(id)} />
                     </View>
                 </ScrollView>
+                {(matDataLayout.length > 0 && tapitBtn) && <View style={styleMat.tapItBtn}>   
+                    <CustomButton
+                        width={'match'}
+                        onpressed={e=> {
+                            if (isNfcSupport) {
+                                if (Platform.OS == 'android') {
+
+                        showTapIt(false)
+                                    nfcRefDialog.current.snapTo(0)
+                                    setDisableView('none')
+                                }
+                                readData()
+                            } else {
+                                showSnackBar('Device does not support for use this method')
+                            }
+                            setAddDialog(false)
+                        }}
+                        backgroundColor={color.white}
+                        text={strings.tap_it.toUpperCase()} />
+                </View>}
                 {(matDataLayout.length > 0) ? null : <EmptyBoxLayout />}
                 <BottomSheet
                     ref={addRef}
                     snapPoints={[290, 0, 0]}
                     enabledInnerScrolling={false}
-                    onCloseEnd={() => setDisableView('')}
+                    onCloseEnd={() => {
+                        showTapIt(true)
+                        setDisableView('')
+                    }}
                     enabledContentGestureInteraction={true}
                     callbackNode={fall}
                     initialSnap={1}
@@ -228,7 +256,10 @@ const MatLayout = (props) => {
                     ref={nfcRefDialog}
                     snapPoints={[330, 0, 0]}
                     enabledInnerScrolling={false}
-                    onCloseEnd={() => setDisableView('')}
+                    onCloseEnd={() => {
+                        showTapIt(true)
+                        setDisableView('')
+                    }}
                     enabledContentGestureInteraction={true}
                     callbackNode={fall}
                     initialSnap={1}
@@ -238,7 +269,10 @@ const MatLayout = (props) => {
                     snapPoints={['65%', 0, 0]}
                     enabledInnerScrolling={true}
                     borderRadius={30}
-                    onCloseEnd={() => setDisableView('')}
+                    onCloseEnd={() => {
+                        showTapIt(true)
+                        setDisableView('')
+                    }}
                     enabledContentGestureInteraction={true}
                     callbackNode={fall}
                     initialSnap={1}
@@ -261,10 +295,21 @@ const MatLayout = (props) => {
 const styleMat = StyleSheet.create({
     parent: {
         backgroundColor: color.white,
-        marginTop: ukuran.dp_40,
+        marginTop: ukuran.dp_18,
         width: ukuran.wpPercent90,
         alignSelf: 'center'
     },
+
+    tapItBtn: {
+        width: '50%',
+        alignSelf: 'center',
+        elevation: 3,
+        position: 'absolute',
+        shadowOpacity: 0.9,
+        shadowColor: color.white_300,
+        justifyContent: 'center',
+        bottom: 0
+    }
 
 })
 
