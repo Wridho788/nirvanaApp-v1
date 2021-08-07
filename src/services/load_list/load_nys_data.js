@@ -27,7 +27,7 @@ export async function loadListNysData(categoryId, page, nav, isSlider){
         .catch(err => {
             response = err
         })
-
+    console.log(response)    
     for(var i = 0; i < response.length; i++){
         var dataS = response[i]
         mapData.push({

@@ -1,7 +1,8 @@
 import moment from 'moment'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { BackHandler, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import Video from 'react-native-video'
 import { convertSeconds, showSnackBar } from '../../../../../functions/helper'
 import StopWatchReact from '../../../../../functions/stopwatch'
 import color from '../../../../../material/color'
@@ -9,6 +10,7 @@ import Constant from '../../../../../material/constant'
 import ukuran from '../../../../../material/dimen'
 import strings from '../../../../../material/strings'
 import { authAccountProccess, requestChangePassword } from '../../../../../services/account_process'
+import { loadVideoUrl } from '../../../../../services/load_list/load_training_progress_data'
 import { ConfirmationDialog, CustomProgressBar, ViewCustomDialog } from '../../../../items/progress_bar'
 import TextTitle from '../../../../items/title_text'
 import ProgressInputTraining from '../../../../items/training_mat_section/progress_input_data'
@@ -26,11 +28,15 @@ const PageTraining = (props) => {
     const [isDiscard, setDiscard] = useState(false)
     const [timeNow, setTimeNow] = useState(Date.now())
     const [areaTraining, showAreaTraining] = useState(true)
-
+    const [isPaused, setPaused] = useState(true)
+    const [urlVideo, setUrlVideo] = useState('')
+    
     //save data section
     const [typeYoga, setTypeYoga] = useState('')
     const [placeYoga, setPlaceYoga] = useState('')
     const [titleYoga, setTitleYoga] = useState('')
+
+    var withOur = props.route.params.withOur
 
     const inputToDb = async () => {
         if(typeYoga.length > 0 && titleYoga.length > 0 && placeYoga.length > 0){
@@ -62,7 +68,12 @@ const PageTraining = (props) => {
     }
 
     useEffect(() =>{
-        setCurrentTime(moment().format('HH:mm'))        
+        (async () =>{
+            BackHandler.addEventListener('hardwareBackPress', () => true)
+            var videoUrl = await loadVideoUrl()
+            setUrlVideo(videoUrl)
+            setCurrentTime(moment().format('HH:mm'))        
+        })()
     }, [])
 
     return(
@@ -72,14 +83,15 @@ const PageTraining = (props) => {
             onCancel={e => setDiscard(false)} onYes={e => {
                 setDiscard(false)
                 props.navigation.goBack()
-                
                 }}/>}/>)}
            <View style={{backgroundColor: color.white, flex: 1, flexDirection: 'row', alignSelf: 'center'}}>
                <View style={stylePage.parent}>
+                    {areaTraining && withOur ? <Video paused={isPaused} controls={true} source={{uri: urlVideo}}
+                        style={stylePage.videoBackground} repeat={true} resizeMode="cover"/> : null}
                         {areaTraining && <View>
                             <TextTitle fontSize={ukuran.dp_18} align={'center'} text={`Clock`.toUpperCase()}
                                 maxLine={1} warna={color.defaultColor}/>
-                            <TextTitle fontSize={90} align={'center'} tipe={'bold'} text={currentTime}
+                            <TextTitle fontSize={60} align={'center'} tipe={'bold'} text={currentTime}
                                 maxLine={1} warna={color.defaultColor} top={ukuran.dp_10}/>
                              <UnderlineLayoutGrey/>
                         </View>    }
@@ -96,12 +108,14 @@ const PageTraining = (props) => {
                                 if(startStopwatch){ 
                                     setShowFinishBtn(true)
                                     setStartStopWatch(false)
+                                    setPaused(true)
                                     setTextAction('Resume')
                                 }else if(saveBtn){
                                     inputToDb()
                                 }else{
                                     setShowFinishBtn(true)
                                     setStartStopWatch(true)
+                                    setPaused(false)
                                     setTextAction('Pause')
                                 }
                             }}>
@@ -113,6 +127,7 @@ const PageTraining = (props) => {
                                 setShowFinishBtn(false)
                                 setSaveBtn(true)
                                 showAreaTraining(false)
+                                setPaused(true)
                                 showSetInputData(true)
                                 setTextAction('Save')
                             }}>
@@ -161,12 +176,15 @@ const stylePage = StyleSheet.create({
         backgroundColor: color.white
     },
 
+    videoBackground: {
+        height: 240,
+        marginBottom: ukuran.dp_24
+    },
+
     areaButton: {
-        position: 'absolute',
-        bottom: 0,
         flexDirection: 'row',
-        marginTop: ukuran.dp_30,
         alignSelf: 'center',
+        marginTop: ukuran.dp_24,
         marginBottom: ukuran.dp_30
     },
 

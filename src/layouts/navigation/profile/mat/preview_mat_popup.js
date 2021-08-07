@@ -97,11 +97,11 @@ const PreviewMat = (props) => {
                                     backgroundColor={color.defaultColor}
                                     text={!props.onStartText ?`Start Yoga` : props.onStartText} />
                                     
-                                {/* <CustomButton
+                                <CustomButton
                                     width={'match'}
                                     onpressed={props.onProgressPress}
                                     backgroundColor={color.white}
-                                    text={!props.onProgressText ?`Progress` : props.onProgressText} /> */}
+                                    text={!props.onProgressText ?`Progress` : props.onProgressText} />
                             </View>
                                 
                         }

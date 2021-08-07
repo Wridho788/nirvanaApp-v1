@@ -45,6 +45,8 @@ import TipsTrainingMain from '../navigation/nys_section/tips_training_main_layou
 import MatYogaStart from '../navigation/profile/mat/start_yoga_mat/start_yoga_main_layout';
 import PageTraining from '../navigation/profile/mat/start_yoga_mat/page_training_layout';
 import BlankHeader from '../items/blank_header';
+import ProgressInputTraining from '../items/training_mat_section/progress_input_data';
+import ProgressTrainingLayout from '../navigation/profile/mat/progress_training_layout';
 
 const Tab = createBottomTabNavigator()
 
@@ -168,15 +170,15 @@ export default class Router extends Component {
     MatData = () => {
         return (
             <Stack.Navigator>
-                <Stack.Screen name="MyMatList" component={MatLayout} options={({ navigation }) => ({
+                <Stack.Screen name="MyMatList" component={MyMatLayout} options={({ navigation }) => ({
                     header: () => (<TopHomeBar navigasi={navigation} />)
                 })} />
                 <Stack.Screen name="StartYogaMatMain" component={MatYogaStart} options={({ navigation }) => ({
                     header: () => (<BackTopHeader navigasi={navigation} />)
                 })} />
 
-                <Stack.Screen name="PageTraining" component={PageTraining} options={({ navigation }) => ({
-                    header: () => (<BlankHeader navigasi={navigation} />)
+                <Stack.Screen name="MatTrainingProgress" component={ProgressTrainingLayout} options={({ navigation }) => ({
+                    header: () => (<BackTopHeader navigasi={navigation} />)
                 })} />
             </Stack.Navigator>
         )
@@ -262,6 +264,10 @@ export default class Router extends Component {
                     <Stack.Screen name="Splash" component={SplashLayout} options={verticalAnimation}/>
                     <Stack.Screen name="Order" component={this.OrderData} />
                     <Stack.Screen name="Main" component={this.HomeWithBottomTab} />
+                    <Stack.Screen name="PageTraining" component={PageTraining}  options={({ navigation }) => ({
+                        header: () => (<BlankHeader navigasi={navigation} />),
+                        gestureEnabled: false,
+                    })} />
                 </Stack.Navigator>
             </>
         )

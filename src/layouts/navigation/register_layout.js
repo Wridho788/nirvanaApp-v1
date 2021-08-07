@@ -22,12 +22,9 @@ import {TermText} from '../items/term_condition_text'
 import { useRef } from 'react';
 import Constant from '../../material/constant';
 import ConfirmGoogleChaptcha from 'react-native-google-recaptcha-v2'
-import react from 'react';
 import {authAccountProccess, getTokenData} from '../../services/account_process'
-import { event } from 'react-native-reanimated';
 import {OneMessageProgress, CustomProgressBar, ViewCustomDialog} from '../items/progress_bar';
 import VerifMethodDialog from '../items/register_verif_dialog';
-import jwt_decode from "jwt-decode";
 
 const label = ["", "", ""]
 const stepStyle = {

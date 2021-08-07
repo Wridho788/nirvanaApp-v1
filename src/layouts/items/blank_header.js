@@ -41,7 +41,7 @@ export default BlankHeader
 const styleHeader = StyleSheet.create({
     parent: {
         backgroundColor: color.white,
-        padding: ukuran.dp_18,
+        padding: ukuran.dp_24,
         flexDirection: 'row'
     },
 

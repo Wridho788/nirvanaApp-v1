@@ -32,6 +32,7 @@ const ViewCustomDialog = ({isVisible, view, onDismiss, onConfirm}) => {
             showCancelButton={onConfirm}
             showConfirmButton={onConfirm}
             confirmButtonColor={color.defaultColor}
+            onCancelPressed={onDismiss}
             show={isVisible}
             onCancelPressed={onDismiss}
             onDismiss={onDismiss}

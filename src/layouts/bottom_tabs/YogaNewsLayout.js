@@ -43,7 +43,6 @@ const YogaNewsLayout = (props) => {
     return (
         <>
             <ScrollView style={{backgroundColor:color.white}} showsVerticalScrollIndicator={false} bounces={false}  onScroll={({nativeEvent}) => {
-                        
                         if (isCloseToBottom(nativeEvent)) {
                             if(totalData > 0){
                                 setLoadMore(false)
@@ -57,13 +56,13 @@ const YogaNewsLayout = (props) => {
                         <TextTitle text={'NIRVANA '} tipe={'bold'} fontSize={ukuran.dp_20} />
                         <TextTitle text={'YOGA SHALA'} fontSize={ukuran.dp_20} />
                     </Text>
-                    <UnderLineCustom height={1} color={color.defaultColor} />
+                    <UnderLineCustom height={1} color={color.white_300} />
                         <View
                             style={{ flexWrap: 'wrap', justifyContent: 'center', flexDirection: 'row', marginTop: ukuran.dp_20, marginBottom: ukuran.dp_40 }}>
-                            <CategoryYogaNews categoryName={strings.yogahealth} onPressed={e => props.navigation.navigate('TipsTrainingMain', {isNews: true, title: strings.yogahealth, id: 2})}/>
-                            <CategoryYogaNews categoryName={strings.figur} onPressed={e => props.navigation.navigate('TipsTrainingMain', {isNews: true, title: strings.figur, id: 3})}/>
-                            <CategoryYogaNews categoryName={strings.komunitas} onPressed={e => props.navigation.navigate('TipsTrainingMain', {isNews: true, title: strings.komunitas, id: 5})}/>
-                            <CategoryYogaNews categoryName={strings.videoYoga} isLast={true} onPressed={e => props.navigation.navigate('TipsTrainingMain', {isNews: false, title: strings.videoYoga, id: 8})}/>
+                            <CategoryYogaNews uri={'https://source.unsplash.com/512x512/?health'} categoryName={strings.yogahealth} onPressed={e => props.navigation.navigate('TipsTrainingMain', {isNews: true, title: strings.yogahealth, id: 2})}/>
+                            <CategoryYogaNews uri={'https://source.unsplash.com/512x512/?inspiration,people'}  categoryName={strings.figur} onPressed={e => props.navigation.navigate('TipsTrainingMain', {isNews: true, title: strings.figur, id: 3})}/>
+                            <CategoryYogaNews uri={'https://source.unsplash.com/512x512/?community'}  categoryName={strings.komunitas} onPressed={e => props.navigation.navigate('TipsTrainingMain', {isNews: true, title: strings.komunitas, id: 5})}/>
+                            <CategoryYogaNews  uri={'https://source.unsplash.com/512x512/?nature'} categoryName={strings.videoYoga} isLast={true} onPressed={e => props.navigation.navigate('TipsTrainingMain', {isNews: false, title: strings.videoYoga, id: 8})}/>
                         </View>
                     <View
                         style={{ width: ukuran.wpPercent90, alignSelf: 'center', flexWrap: 'wrap', alignItems : 'center', flexDirection: 'row', marginBottom: ukuran.dp_24 }}>

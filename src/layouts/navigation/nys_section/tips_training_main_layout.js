@@ -62,7 +62,8 @@ const TipsTrainingMain = (props) => {
                         }} scrollEventThrottle={16}>
                 <View style={styleNews.parent}>
                     <Text style={{ textAlign: 'center', marginBottom: ukuran.dp_24 }}>
-                        <TextTitle text={title} tipe={'bold'} fontSize={ukuran.dp_20} />
+                        <TextTitle text={String(title).includes('VIDEO') ? 'VIDEO ' : title} tipe={String(title).includes('VIDEO') ? 'normal' : 'bold'} fontSize={ukuran.dp_20} />
+                        {String(title).includes('VIDEO') && <TextTitle text={'YOGA'} tipe={'bold'} fontSize={ukuran.dp_20} />}
                     </Text>
                     <UnderLineCustom height={1} color={color.defaultColor} />
                     <View

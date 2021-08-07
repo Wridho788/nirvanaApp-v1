@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import color from '../../../material/color'
@@ -7,7 +7,6 @@ import TextTitle from '../../items/title_text'
 import MarkDown from 'react-native-markdown-display'
 import UnderLineCustom from '../../items/custom_underline'
 import NewsYoga from '../../items/yoga_news_section/article_yoga_news'
-import { useState } from 'react/cjs/react.development'
 import LoadingAnimationLayout from '../../items/loading_animation'
 import { loadDetailNys, loadListNysData, loadVideoDataNys } from '../../../services/load_list/load_nys_data'
 import TipsCategoryData from '../../items/yoga_news_section/tips_training_nys'
@@ -52,9 +51,9 @@ const DetailNysLayout = (props) => {
             <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
                 <View style={styleDetail.parent}> 
                     <TextTitle align={'center'} maxLine={99} text={dataDetail.title} tipe={'bold'} top={ukuran.dp_30} fontSize={ukuran.dp_20} start={ukuran.dp_10} end={ukuran.dp_10} />
-                    <TextTitle align={'center'} maxLine={99} warna={color.white_100} text={dataDetail.shortDesc} top={ukuran.dp_16} fontSize={ukuran.dp_12} start={ukuran.dp_10} end={ukuran.dp_10} />
+                    <TextTitle align={'center'} maxLine={99} warna={color.white_100} text={dataDetail.shortDesc} top={ukuran.dp_10} fontSize={ukuran.dp_12} start={ukuran.dp_10} end={ukuran.dp_10} />
                     {(dataDetail.isVideo != null) ? 
-                        <WebView source={{uri: dataDetail.videoLink}} style={{height: 240}} javaScriptEnabled={true} domStorageEnabled={true}/>
+                        <WebView source={{uri: dataDetail.videoLink}} style={{height: 240, marginTop: ukuran.dp_16}} javaScriptEnabled={true} domStorageEnabled={true}/>
                         :
                         <FastImage
                             style={styleDetail.image}
@@ -89,8 +88,8 @@ const DetailNysLayout = (props) => {
 
 const markdownStyle = StyleSheet.create({
     body:{
-        marginStart: ukuran.dp_10,
-        marginEnd: ukuran.dp_10,
+        marginStart: ukuran.dp_24,
+        marginEnd: ukuran.dp_24,
     },
     text: {
         color: color.defaultColor,

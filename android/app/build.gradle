@@ -132,8 +132,8 @@ android {
         applicationId "id.nirvanastore"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 122
-        versionName "1.1.40"
+        versionCode 123
+        versionName "1.1.41"
         multiDexEnabled true
     }
     splits {

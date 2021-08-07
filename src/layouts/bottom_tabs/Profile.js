@@ -169,10 +169,10 @@ const ProfileLayout = (props) => {
                             }})}/>
                         </View>
                         <View style={{marginBottom: ukuran.dp_30}}>
-                            <UnderlineLayout/>
+                            {/* <UnderlineLayout/>
                             <LinkLayout text={strings.mymat} onpressed={()=>{
                                 props.navigation.navigate('MyMat')
-                                }}/>
+                                }}/> */}
                             <UnderlineLayout/>
                             <LinkLayout text={strings.myAddress} onpressed={()=>{
                                 props.navigation.navigate('MyAddress')

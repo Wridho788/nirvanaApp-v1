@@ -33,8 +33,8 @@ const MyMatLayout = (props) => {
     }, [null])
     return(
         <>
-            <TopHomeBar navigasi={props.navigation}/>
-            <MatLayout/>
+            {/* <TopHomeBar navigasi={props.navigation}/> */}
+            <MatLayout navigation={props.navigation}/>
         </>
     )
 }
