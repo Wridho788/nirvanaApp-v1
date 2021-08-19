@@ -83,7 +83,7 @@ const TipsTrainingMain = (props) => {
                     <View
                         style={{ marginEnd: ukuran.dp_10, marginTop: ukuran.dp_24, marginStart: ukuran.dp_10, alignSelf: 'center', flexWrap: 'wrap', alignItems: 'center', flexDirection: 'row', marginBottom: ukuran.dp_24 }}>
                         <Text style={{ textAlign: 'center', marginEnd: ukuran.dp_10 }}>
-                            <TextTitle text={isNews ? 'ARTIKEL ' : 'VIDEO '} tipe={'bold'} fontSize={ukuran.dp_18} />
+                            <TextTitle text={isNews ? 'ARTIKEL ' : ' '} tipe={'bold'} fontSize={ukuran.dp_18} />
                             <TextTitle text={'TERBARU'} fontSize={ukuran.dp_18} />
                         </Text>
                         <UnderLineCustom height={1} color={color.defaultColor} />

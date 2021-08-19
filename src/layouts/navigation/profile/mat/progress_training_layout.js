@@ -21,7 +21,7 @@ const ProgressTrainingLayout = (props) => {
     const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) =>{
         return layoutMeasurement.height + contentOffset.y >= contentSize.height - 20;
      }
-
+    //  mapping load data training progress user
     useEffect(() => {
         if(!isLoaded){
             (async() =>{

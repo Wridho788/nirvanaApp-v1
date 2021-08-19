@@ -204,12 +204,6 @@ const ProfileLayout = (props) => {
                                 }}
                             />
                             <UnderlineLayout/>
-                            <LinkLayout text={strings.bulletin}
-                                onpressed={() =>{
-                                    Linking.openURL(Constant.bulletinUrl)
-                                }}
-                            />
-                            <UnderlineLayout/>
                             <LinkLayout text={strings.aboutUs}
                                 onpressed={() =>{
                                     Linking.openURL(Constant.aboutUrl)

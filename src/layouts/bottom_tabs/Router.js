@@ -44,6 +44,7 @@ import DetailNysLayout from '../navigation/nys_section/detail_nys_layout';
 import TipsTrainingMain from '../navigation/nys_section/tips_training_main_layout';
 import MatYogaStart from '../navigation/profile/mat/start_yoga_mat/start_yoga_main_layout';
 import PageTraining from '../navigation/profile/mat/start_yoga_mat/page_training_layout';
+import MatYogaPreStart from '../navigation/profile/mat/preview_mat';
 import BlankHeader from '../items/blank_header';
 import ProgressInputTraining from '../items/training_mat_section/progress_input_data';
 import ProgressTrainingLayout from '../navigation/profile/mat/progress_training_layout';
@@ -177,10 +178,15 @@ export default class Router extends Component {
                 <Stack.Screen name="StartYogaMatMain" component={MatYogaStart} options={({ navigation }) => ({
                     header: () => (<BackTopHeader navigasi={navigation} />)
                 })} />
+                {/* show main process before start yoga mat main */}
+                <Stack.Screen name="StartYogaMatMainProcess" component={MatYogaPreStart} options={({ navigation }) => ({
+                    header: () => (<BackTopHeader navigasi={navigation} />)
+                })} />
 
                 <Stack.Screen name="MatTrainingProgress" component={ProgressTrainingLayout} options={({ navigation }) => ({
                     header: () => (<BackTopHeader navigasi={navigation} />)
                 })} />
+               
             </Stack.Navigator>
         )
     }
